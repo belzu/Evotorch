@@ -1,0 +1,56 @@
+======
+MLP
+======
+
+In order to EVOLVE the neural network you have to run this command in the command line (with the "<" and ">" symbols):
+python evolve_MLP.py <csv file> <mode>
+
+EXAMPLE OF CLASSIFICATION PROBLEM: python evolve_MLP.py Datasets/Problem_Datasets/Classification/mushroom.csv 0
+EXAMPLE OF REGRESSION PROBLEM: python evolve_MLP.py Datasets/Problem_Datasets/Regression/forest_fires_simplified 1
+
+In order to evolve the neural networks there are two things you must keep in mind: The evolution parameters and the fenotipe's default values.
+If you want to evolve certain hiperparameters, you must enter "hddn_fc_lyrs" (hidden layers),"lr" (learning rate),"epcs" (epochs),"pat" (patience),"hddn_fc_lyrs_sz"(hidden layers size), "act_fncs"(activation functions) or "drpt"(dropouts) on the evol_hparameters parameter in the GenAlg_MLP_Descriptor instance. You can fit as many hiperparameters as you want.
+
+On this very Descriptor there are also these parameters with their respective default values, which correspond to the ones that the Individuals/Fenotipes will take by default during the evolutions: hidden_fc_layers=[5,5], input_dim = 100, output_dim = 100, act_functions_ref="relu_all", dropout=[0.5,0.5], batch_size=1, epochs=5, learning_rate=0.01, optim_ref="adam", criter_ref="nlll", print_every=2, patience=5 and mode=0
+
+If one or some of these hiperparameters won't be evolved, then you must define them with the values you want them to take during the training and validation, knowing that those will be the values all the individuals will take. If they will be evolved, then you shall take no care about the values you define them with.
+It is important to know that if you will not be evolving the hidden layers' size, the way in which you define it will be with the LENGTH of the hidden_fc_layers argument when instanciating the descriptor. The lengths of hidden_fc_layers, act_functions_ref (considering they are not relu_all nor sigmoid_all) and dropout MUST BE THE SAME. The lengths of hidden_fc_layers, act_functions_ref and dropout will always be the same, so if you define "hddn_fc_lyrs_sz" as a characteristic to evolve, you must know that the values of these three atributes will change because of the intrinsic nature of the hidden layers' size evolution.
+
+
+In order to EXECUTE the neural network you have to run this command in the command line (with the "<" and ">" symbols):
+
+EXAMPLE OF CLASSIFICATION PROBLEM: python exec_MLP.py Datasets/Problem_Datasets/Classification/mushroom.csv
+EXAMPLE OF REGRESSION PROBLEM: python exec_MLP.py Datasets/Problem_Datasets/Regression/forest_fires_simplified
+
+
+The neural networks' information will be hold into txt files with this format:
+
+number of neurons on each hidden layers
+number of input neurons (the number of features for each instance)
+number of output neurons
+activation functions reference (relu:RELU, sigmoid: sigmoid, relu_all: All RELU, sigmoid_all: All Sigmoid)
+dropout on each layer
+batch size
+number of epochs
+learning rate
+optimizer reference (adam:Adam, sgd: SGD)
+criterion reference (nlll:NLLLoss, mse:MSELoss, crossentl:CrossEntropyLoss)
+print every
+patience limit
+mode (clssf: Classification, 1: rgrss)
+
+
+EXAMPLE OF A NEURAL NETWORKS' INFORMATION:
+[47,50]
+10
+1
+relu_all
+[0.5, 0.5]
+16
+19
+0.0008724419871305545
+sgd
+mse
+20
+10
+rgrss
