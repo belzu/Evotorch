@@ -17,7 +17,7 @@ input, as well as to save or load one. Evotorch allows you to create two differe
 
 This module is in charge of implementing a genetic algorithm using DEAP classes, functions and data. Allows the user to create a genetic algorithm.
 Evotorch allows you to create two different types of genetic algorithms: GenAlg_MLP and GenAlg_CNN.
-The user is allowed to decide which set of hyperparameters can evolve. For MLP networks are: the number of neurons in each hidden layer, the learning rate, the
+The user is allowed to decide which set of hyperparameters evolve. For MLP networks are: the number of neurons in each hidden layer, the learning rate, the
 number of epochs, patience, number of hidden layers, activation functions and the dropouts. For CNN networks, in addition to the same as MLP networks, they are: number of convolutional sequences, the number of kernels in each convolutional layer, the size of the kernels in each convolution and pooling layer and the size of the stride in each convolution layer.
 
 A convolutional sequence is, as the name suggests, a sequence of two layers: convolutional layers + MaxPooling layers.
@@ -28,7 +28,7 @@ Executing Evotorch is very simple, but there are two things that the user must t
 * In the **exec_MLP.py** and **exec_CNN.py** files examples on how to execute the neural networks are found. These files were created with the purpose of testing the execution of the neural networks.
 * In the **evolve_MLP.py** and **evolve_CNN.py** files examples on how to obtain optimized neural networks are found. These files were created with the purpose of testing the genetic algorithms.
 
-**By default Evotorch DOES NOT return a Neural Network, it returns THE OPTIMAL COMBINATION OF VALUES FOR THE HIPERPARAMETERS THAT WERE ELECTED BY THE USER; in other words, it returns the combination of hiperparameter values that results in the optimal learning of a neural network for a given problem.**
+**By default Evotorch DOES NOT return a neural network, it returns THE OPTIMAL COMBINATION OF VALUES FOR THE HIPERPARAMETERS THAT WERE ELECTED BY THE USER; in other words, it returns the combination of hiperparameter values that results in the optimal learning of a neural network for a given problem.**
 
 This combination of hiperparameters is represented as a text file containing the following format:
 * For MLP networks:
@@ -63,11 +63,11 @@ This combination of hiperparameters is represented as a text file containing the
   * list of list of two integers
   * list of integers
   
-### Steps for properly execute Evotorch
+### Steps to properly execute Evotorch
 
-1. Define the hiperparameters' values as well as which ones you want to evolve along with the evolution's parametric criteria.
-2. Create an instance of a genetic algorithm by calling GenAlg_MLP(GenAlg_MLP_Descriptor(< arguments >)) or GenAlg_CNN(GenAlg_CNN_Descriptor(< arguments >)).
-3. Execute *simple_genetic_algorithm function*. A file named NN_< datetime >.txt will appear in the directory you choose (./ by default) containing the optimal values for the hiperparameters.
-4. Create an instance of a neural network with MLP_Network(MLP_Descriptor()) or CNN_Network(CNN_Descriptor()).
-5. Pass the hiperparameters you obtained on the step **3** to the neural network you created on the step 4 with *load_NN_info(< text file containing the hiperparameters >)* function.
-6. Execute the *training_MLP(< training set >)* and *testing_MLP(< test set >)* functions. You will obtain the accuracy or MSE loss (depending on the kind of problem we are facing: classification (MLP networks with mode = "clssf" and CNN) or regression (MLP networks with mode = "rgrss")). You can save the neural network with *save_NN( < file name >)* function and load it with load_NN(*< file name >)*.
+1. Define the hiperparameters' values along with the evolution's parametric criteria.
+2. Create an instance of a genetic algorithm by calling *GenAlg_MLP(GenAlg_MLP_Descriptor(< arguments >))* or *GenAlg_CNN(GenAlg_CNN_Descriptor(< arguments >))*.
+3. Execute *simple_genetic_algorithm* function. A file named *NN_< datetime >.txt* will be created in the directory you choose (./ by default) containing the optimal values of the hiperparameters.
+4. Create an instance of a neural network with *MLP_Network(MLP_Descriptor())* or *CNN_Network(CNN_Descriptor())*.
+5. Pass the hiperparameters you obtained on step **3** to the neural network you created on step **4** with *load_NN_info(< text file containing the hiperparameters >)* function.
+6. Execute *training_MLP(< training set >)* and *testing_MLP(< test set >)* functions. You will obtain the accuracy or MSE loss depending on the kind of problem you are facing: **classification** (MLP networks with *"clssf"* mode and CNN) or **regression** (MLP networks with *"rgrss"* mode)) respectively. You can save the neural network with *save_NN( < file name >)* and load it with *load_NN(< file name >)*.
